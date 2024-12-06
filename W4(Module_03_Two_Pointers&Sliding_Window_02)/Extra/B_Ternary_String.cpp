@@ -1,0 +1,75 @@
+// Bismillahir Rahmanir Raheem
+
+// author : VaLEnT_DouLoS ( Abir ) 
+
+#include <bits/stdc++.h>
+
+using namespace std ; 
+
+#define f first
+#define s second
+#define pb push_back
+#define ppb pop_back
+#define pf push_front
+#define ppf pop_front
+#define ll long long int
+#define ld long double
+#define ed endl
+#define B begin
+#define rb rbegin
+#define E end
+#define re rend
+#define bs binary_search
+#define ub upper_bound
+#define lb lower_bound
+#define tc() long long int test_case ; cin >> test_case ; while(test_case--)
+#define cout(a) cout << a << endl
+#define all(v) sort(v.begin(),v.end())
+#define rall(v) sort(v.rbegin(),v.rend())
+#define rev(v) reverse(v.begin(),v.end())
+#define sz(s) s.size() ;
+#define FastRead ios_base::sync_with_stdio(false);cin.tie(0),cout.tie(0)
+#define inf INT_MAX ;
+#define clr(x,y) memset(x,y,sizeof x)
+#define pii pair<ll,ll>
+#define vll vector<ll>
+
+void solve()
+{
+    string a ; 
+    cin >> a ; 
+    ll one = 0 , two = 0 , three = 0 ; 
+    a = ' ' + a ; 
+    ll n = sz(a) ; 
+    ll ans = 1e18 ; 
+    for(ll i=1;i<=n;i++)
+    {
+        if(a[i]=='1')
+        {
+            one = i ; 
+        }
+        if(a[i]=='2')
+        {
+            two = i ; 
+        }
+        if(a[i]=='3')
+        {
+            three = i ; 
+        }
+        if(one && two && three)
+        {
+            ll mn = min({one,two,three}) ; 
+            ll mx = max({one,two,three}) ; 
+            ans = min(ans , mx-mn+1) ; 
+        }
+    }
+    if(ans==1e18)ans=0;
+    cout << ans << '\n' ;
+}
+
+int main()
+{
+   FastRead;
+   tc()
+    solve();
+}
