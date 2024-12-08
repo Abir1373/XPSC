@@ -1,6 +1,6 @@
 // Bismillahir Rahmanir Raheem
 
-// author : !YELLALOT ( Abir ) 
+// author : VaLEnT_DouLoS ( Abir ) 
 
 #include <bits/stdc++.h>
 
@@ -36,58 +36,27 @@ using namespace std ;
 
 void solve()
 {
-    ll n ;
-    cin >> n ; 
-    deque<ll>dq(n) ; 
+    ll n ; cin >> n ; 
+    vll v(n) , pre(n,0) ; 
     for(ll i=0;i<n;i++)
     {
-        cin>>dq[i] ; 
+        cin >> v[i] ; 
     }
-    deque<ll>ans ; 
-    while(!dq.empty())
+    pre[0] = v[0] ; 
+    for(ll i=1;i<n;i++)
     {
-        ll p = 0 ;  
-        if(ans.empty())
+        pre[i] = pre[i-1] + v[i] ; 
+    }
+    ll mx = 0 , ans = 0 ; 
+    for(ll i=0;i<n;i++)
+    {
+        mx = max(mx,v[i]) ; 
+        if(pre[i]-mx==mx)
         {
-            ans.pb(dq.front()) ; 
-            dq.ppf() ;
-            p = 1 ;
-        }
-        ll a = ans.front() ; 
-        ll b = ans.back() ;
-        ll x = dq.front() ; 
-        ll y = dq.back() ;
-        if(x<=a && p==0)
-        {
-            ans.pf(x) ; 
-            dq.ppf() ; 
-            p = 1 ; 
-        }
-        else if(y<=a && p==0)
-        {
-            ans.pf(y);
-            dq.ppb() ; 
-            p = 1 ; 
-        }
-        else if(x>=b && p==0)
-        {
-            ans.pb(x) ; 
-            dq.ppf() ; 
-            p=1 ;
-        }
-        else if(y>=b && p==0)
-        {
-            ans.pb(y) ; 
-            dq.ppb() ;
-            p = 1 ;  
-        }
-        if(p==0)
-        {
-            cout << "No" << '\n' ; 
-            return ;
+            ans++ ; 
         }
     }
-    cout << "Yes" << '\n' ;
+    cout << ans << '\n' ;
 }
 
 int main()
