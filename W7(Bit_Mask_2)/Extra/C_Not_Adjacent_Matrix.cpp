@@ -36,20 +36,28 @@ using namespace std ;
 
 void solve()
 {
-    ll n ; cin >> n ; 
-    string a , b ; cin >> a >> b ; 
-    ll a1=0 , b1=0 ; 
-    for(ll i=0;i<n;i++)
+    ll n ;
+    cin >> n ; 
+    if(n==2)
     {
-        if(a[i]=='1'){
-            a1++;
-        }
-        if(b[i]=='1')
+        cout << "-1\n";
+        return ; 
+    }
+    if(n==1)
+    {
+        cout << "1\n";
+        return ;
+    }
+    ll one = 1 ; 
+    for(ll i=1;i<=n;i++)
+    {
+        for(ll j=1;j<=n;j++)
         {
-            b1++;
+            cout << one << " \n"[j==n];
+            one+=2 ;
+            if(one>(n*n))one=2;
         }
     }
-    cout << ((b1%2)==(a1%2) ? "YES" : "NO") << '\n';
 }
 
 int main()

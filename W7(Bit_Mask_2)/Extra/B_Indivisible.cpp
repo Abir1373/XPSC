@@ -37,19 +37,29 @@ using namespace std ;
 void solve()
 {
     ll n ; cin >> n ; 
-    string a , b ; cin >> a >> b ; 
-    ll a1=0 , b1=0 ; 
+    if(n==1)
+    {
+        cout << 1 << '\n' ; 
+        return ; 
+    }
+    if(n&1)
+    {
+        cout << -1 << '\n' ; 
+        return ; 
+    }
+    ll evn = 2 , odd = 1 ; 
     for(ll i=0;i<n;i++)
     {
-        if(a[i]=='1'){
-            a1++;
-        }
-        if(b[i]=='1')
+        if(i&1) 
         {
-            b1++;
+            cout << odd << " \n"[i==n-1] ;
+            odd+=2; 
+        }
+        else {
+            cout << evn << ' ' ;
+            evn+=2; 
         }
     }
-    cout << ((b1%2)==(a1%2) ? "YES" : "NO") << '\n';
 }
 
 int main()

@@ -36,35 +36,32 @@ using namespace std ;
 
 void solve()
 {
-    ll n , l , r ; cin >> n >> l >> r ; 
-    vll v(n) ; 
-    ll x ; 
-    for(ll i=0;i<n;i++)
+    ll n ; cin >> n ; 
+    vll v(n+1) , vc(n+1) ; 
+    ll cnt = 0 ; 
+    for(ll i=1;i<=n;i++)
     {
         cin >> v[i] ; 
-        if(i){
-            x^=v[i] ; 
-        }
-        else {
-            x = v[i] ; 
-        }
+        vc[n-cnt] = i ;
+        cnt++;
     }
-    vll cnt(31,0) ; 
-    for(ll i=30;i>=0;i--)
+    if(v[1]==n && v[n]==1)
     {
-        cnt[i] = ((x>>i)&1) ; 
+        cout << 3 << '\n' ; 
+        return ; 
     }
-    for(ll i=0;i<n;i++)
-    {
-        ll val = v[i] ^ x ; 
-        if(val<l || val>r)
-        {
-            cout << "NO" << '\n' ; 
-            return ;
-        }
-    }
-    cout << "YES" << '\n';
 
+    if(v[1]!=1 && v[n]!=n)
+    {
+        cout << 2 << '\n' ; 
+        return ; 
+    }
+    if(is_sorted(v.begin()+1,v.end()))
+    {
+        cout << 0 << '\n';
+        return ; 
+    }
+    else cout << 1 << '\n' ;
 }
 
 int main()
