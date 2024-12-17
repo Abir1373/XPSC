@@ -36,60 +36,37 @@ using namespace std ;
 
 void solve()
 {
-    ll n , k , x , y ; cin >> n >> k >> x >> y ; 
-    ll  mn = y ; 
-    char grid[n+1][n+1]  ;
-    for(ll i=y;i>=1;i-=k)
+    ll n , k ; cin >> n; 
+    ll a[n+1][n+1] ; 
+    for(ll i=1;i<=n;i++)
     {
-        mn = min(mn,i) ; 
+        cin>>a[0][i] ; 
     }
     for(ll i=1;i<=n;i++)
     {
+        vll v(n+1,0) ; 
         for(ll j=1;j<=n;j++)
         {
-            grid[i][j] = '.' ;
+            v[a[i-1][j]]++ ; 
         }
-    }
-    
-    // upper level 
-
-    ll col = mn ; 
-
-    for(ll i=x;i>=1;i--)
-    {
-        for(ll j=col;j<=n;j+=k)
-        {
-            grid[i][j] = 'X' ;    
-        }
-        col--;
-        if(col==0)col = k ; 
-    }
-
-    // lower level 
-
-    y=mn+1 ;
-    x++ ;  
-    for(ll i=x;i<=n;i++)
-    {
-        if(y==k+1)y=1;
-        for(ll j=y;j<=n;j+=k)
-        {
-            grid[i][j] = 'X' ; 
-        }
-        y++;
-    }
-
-    for(ll i=1;i<=n;i++)
-    {
         for(ll j=1;j<=n;j++)
         {
-            cout << grid[i][j];
+            a[i][j] = v[a[i-1][j]] ; 
         }
-        cout << nl;
     }
-
+    ll q ; cin >> q ; 
+    while(q--)
+    {
+        ll val , op ; cin >> val >> op  ;
+        if(op>n)
+        {
+            op = n ; 
+        }
+        cout << a[op][val] << '\n' ;
+    }
 
 }
+
 
 int main()
 {

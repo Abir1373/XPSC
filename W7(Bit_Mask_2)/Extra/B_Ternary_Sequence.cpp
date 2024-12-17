@@ -36,59 +36,48 @@ using namespace std ;
 
 void solve()
 {
-    ll n , k , x , y ; cin >> n >> k >> x >> y ; 
-    ll  mn = y ; 
-    char grid[n+1][n+1]  ;
-    for(ll i=y;i>=1;i-=k)
+    ll x1 , y1 , z1 , x2 , y2 , z2 ; 
+    cin >> x1 >> y1 >> z1 >> x2 >> y2 >> z2 ; 
+    ll ans = 0 ; 
+    while(z2)
     {
-        mn = min(mn,i) ; 
+        ll mn = min(z2,x1) ; 
+        z2-=mn ; 
+        x1-=mn;
+        mn = min(z2,z1) ;
+        z2-=mn ; 
+        z1-=mn ; 
+        mn = min(z2,y1) ; 
+        z2-=mn ; 
+        y1-=mn;
+        ans+=(mn*-2) ; 
     }
-    for(ll i=1;i<=n;i++)
+    while(y2)
     {
-        for(ll j=1;j<=n;j++)
-        {
-            grid[i][j] = '.' ;
-        }
+        ll mn = min(y2,z1) ; 
+        y2-=mn ; 
+        z2-=mn ; 
+        ans+=(mn*2) ; 
+        mn = min(y2,y1) ; 
+        y2-=mn ; 
+        y1-=mn ; 
+        mn = min(y2,x1) ; 
+        y2-=mn ; 
+        x1-=mn ; 
     }
-    
-    // upper level 
-
-    ll col = mn ; 
-
-    for(ll i=x;i>=1;i--)
+    while(x2)
     {
-        for(ll j=col;j<=n;j+=k)
-        {
-            grid[i][j] = 'X' ;    
-        }
-        col--;
-        if(col==0)col = k ; 
+        ll mn = min(x2,y1) ; 
+        x2-=mn ; 
+        y1-=mn ; 
+        mn = min(x2,x1) ;
+        x2-=mn ; 
+        x1-=mn ; 
+        mn = min(x2,z1) ; 
+        x2-=mn ; 
+        z1-=mn ; 
     }
-
-    // lower level 
-
-    y=mn+1 ;
-    x++ ;  
-    for(ll i=x;i<=n;i++)
-    {
-        if(y==k+1)y=1;
-        for(ll j=y;j<=n;j+=k)
-        {
-            grid[i][j] = 'X' ; 
-        }
-        y++;
-    }
-
-    for(ll i=1;i<=n;i++)
-    {
-        for(ll j=1;j<=n;j++)
-        {
-            cout << grid[i][j];
-        }
-        cout << nl;
-    }
-
-
+    cout << ans << '\n';
 }
 
 int main()

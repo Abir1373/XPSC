@@ -36,59 +36,61 @@ using namespace std ;
 
 void solve()
 {
-    ll n , k , x , y ; cin >> n >> k >> x >> y ; 
-    ll  mn = y ; 
-    char grid[n+1][n+1]  ;
-    for(ll i=y;i>=1;i-=k)
-    {
-        mn = min(mn,i) ; 
-    }
+    ll n ; cin >> n ; 
+    char grid[n+1][n+1] ; 
     for(ll i=1;i<=n;i++)
     {
         for(ll j=1;j<=n;j++)
         {
-            grid[i][j] = '.' ;
+            cin >> grid[i][j] ; 
         }
     }
-    
-    // upper level 
-
-    ll col = mn ; 
-
-    for(ll i=x;i>=1;i--)
+    char one , two , three , four ; 
+    one = grid[1][2] ; 
+    two = grid[2][1] ; 
+    three = grid[n-1][n] ; 
+    four = grid[n][n-1] ; 
+    vector<pii>ans ; 
+    if(one==two)
     {
-        for(ll j=col;j<=n;j+=k)
+        if(one==three)
         {
-            grid[i][j] = 'X' ;    
+            ans.pb({n-1,n}) ; 
         }
-        col--;
-        if(col==0)col = k ; 
+        if(one==four)
+        {
+            ans.pb({n,n-1}) ; 
+        }
     }
-
-    // lower level 
-
-    y=mn+1 ;
-    x++ ;  
-    for(ll i=x;i<=n;i++)
+    else if(three==four)
     {
-        if(y==k+1)y=1;
-        for(ll j=y;j<=n;j+=k)
+        if(three==one)
         {
-            grid[i][j] = 'X' ; 
+            ans.pb({1,2}) ; 
         }
-        y++;
+        if(three==two)
+        {
+            ans.pb({2,1}) ; 
+        }
     }
-
-    for(ll i=1;i<=n;i++)
+    else 
     {
-        for(ll j=1;j<=n;j++)
+        ans.pb({1,2}) ; 
+        if(one!=three)
         {
-            cout << grid[i][j];
+            ans.pb({n-1,n}) ; 
         }
-        cout << nl;
+        else ans.pb({n,n-1}) ;
     }
-
-
+    ll len = sz(ans) ; 
+    cout << len << nl ; 
+    if(len)
+    {
+        for(ll i=0;i<len;i++)
+        {
+            cout << ans[i].f << ' ' << ans[i].s << "\n"; 
+        }
+    }
 }
 
 int main()
