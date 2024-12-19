@@ -37,44 +37,31 @@ using namespace std ;
 void solve()
 {
     ll n ; cin >> n ; 
-    vll v(n) ; 
-    for(ll i=0;i<n;i++)
+    string ans = "" , ans2 = "" ; 
+    for(ll i=1;i<=n;i++)
     {
-        cin>>v[i] ;
-    }
-    ll ans = 0 , c = 0 , mx = 0 , mx2 = 0  ;
- 
-    for(ll i=0;i<n;i++)
+        if(i&1)
+        {
+            ans+="B";
+            ans2+="W";
+        }
+        else 
+        {
+            ans+="W";
+            ans2+="B";
+        }
+    } 
+    ll x=0 ; 
+    for(ll i=1;i<=n;i++)
     {
-        if(mx==0)
-        {
-            mx = v[i] ; 
-            continue ; 
-        }
-        if(v[i]>mx)
-        {
-            mx = v[i] ; 
-            c++ ; 
-            if(mx>mx2)
-            {
-                c = 0 ; 
-                ans = i ;
-            }
-        }
-        else if(v[i]<mx)
-        {
-            ans = max(c,ans) ; c = 0 ; 
-            mx2 = max(mx2,mx) ; 
-            mx = v[i] ; 
-        }
+        cout << (x==0?ans:ans2) << nl ; 
+        x^=1;
     }
-    if(c)ans = max(c,ans);
-    cout << ans << '\n' ;
 }
 
 int main()
 {
    FastRead;
-   tc()
+//    tc()
     solve();
 }
