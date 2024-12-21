@@ -37,27 +37,29 @@ using namespace std ;
 void solve()
 {
     ll n ; cin >> n ; 
-    string s ; cin >> s ; 
-    ll cS = 0 , cP=0 ; 
+    vector<string>v(n) ; 
+    map<char,ll>one ;
+    map<char,ll>two ; 
+    map<string,ll>mp ; 
     for(ll i=0;i<n;i++)
     {
-        if(s[i]=='s')cS++;
-        if(s[i]=='p')cP++;
+        cin >> v[i] ; 
+        one[v[i][0]]++ ; 
+        two[v[i][1]]++ ; 
+        mp[v[i]]++ ; 
     }
-    if(cS==0 || cP==0)
+    ll ans = 0 ;
+    for(ll i=0;i<n;i++)
     {
-        cout << "YES\n";
-        return ;
+        ll c1 = max(one[v[i][0]]-mp[v[i]],0ll) ;
+        ll c2 = max(two[v[i][1]]-mp[v[i]],0ll) ; 
+        ans+=(c1+c2) ; 
+        if(one[v[i][0]]>0)one[v[i][0]]--;
+        if(two[v[i][1]]>0)two[v[i][1]]--;
+        if(mp[v[i]]>0)mp[v[i]]--;
     }
-    if(cS==1 && s[0]=='s')
-    {
-        cout<<"YES\n";
-    }
-    else if(cP==1 && s[n-1]=='p')
-    {
-        cout<<"YES\n";
-    }
-    else cout << "NO\n";
+    cout << ans << '\n' ;
+
 }
 
 int main()

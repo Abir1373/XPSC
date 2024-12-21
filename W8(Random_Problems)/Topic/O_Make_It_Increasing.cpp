@@ -36,28 +36,28 @@ using namespace std ;
 
 void solve()
 {
-    ll n ; cin >> n ; 
-    string s ; cin >> s ; 
-    ll cS = 0 , cP=0 ; 
-    for(ll i=0;i<n;i++)
-    {
-        if(s[i]=='s')cS++;
-        if(s[i]=='p')cP++;
-    }
-    if(cS==0 || cP==0)
-    {
-        cout << "YES\n";
-        return ;
-    }
-    if(cS==1 && s[0]=='s')
-    {
-        cout<<"YES\n";
-    }
-    else if(cP==1 && s[n-1]=='p')
-    {
-        cout<<"YES\n";
-    }
-    else cout << "NO\n";
+   ll n ;
+   cin>>n ;
+   deque<ll>v(n); 
+   for(auto &it: v)cin>>it ;
+   ll c=0 ;
+   for(ll i=n-2;i>=0;i--)
+   {
+      while(v[i]>=v[i+1] && v[i])
+      {
+         v[i]/=2 ; c++ ; 
+      }
+   }
+   map<ll,ll>mp ;
+   ll p=0 ;
+   for(ll i=0;i<n;i++)mp[v[i]]++;
+   for(auto it: mp)if(it.s>1)p++ ;
+   for(ll i=0;i<n-1;i++)
+   {
+      if(v[i]>v[i+1])p++ ;
+   }
+   if(p)cout(-1) ;
+   else cout(c) ;
 }
 
 int main()

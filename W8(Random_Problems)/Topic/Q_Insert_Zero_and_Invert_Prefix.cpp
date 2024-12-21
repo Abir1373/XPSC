@@ -1,7 +1,3 @@
-// Bismillahir Rahmanir Raheem
-
-// author : VaLEnT_DouLoS ( Abir ) 
-
 #include <bits/stdc++.h>
 
 using namespace std ; 
@@ -14,7 +10,7 @@ using namespace std ;
 #define ppf pop_front
 #define ll long long int
 #define ld long double
-#define nl '\n'
+#define ed endl
 #define B begin
 #define rb rbegin
 #define E end
@@ -29,35 +25,41 @@ using namespace std ;
 #define rev(v) reverse(v.begin(),v.end())
 #define sz(s) s.size() ;
 #define FastRead ios_base::sync_with_stdio(false);cin.tie(0),cout.tie(0)
+#define fr(n) for(ll i=1;i<=n;i++)
+#define rfr(n) for(ll i=n;i>=1;i--) 
+#define in(n) ll n ; cin>>n ;
 #define inf INT_MAX ;
+#define cast(val) val ? cout("YES") : cout("NO") ;
 #define clr(x,y) memset(x,y,sizeof x)
-#define pii pair<ll,ll>
-#define vll vector<ll>
 
 void solve()
 {
-    ll n ; cin >> n ; 
-    string s ; cin >> s ; 
-    ll cS = 0 , cP=0 ; 
-    for(ll i=0;i<n;i++)
-    {
-        if(s[i]=='s')cS++;
-        if(s[i]=='p')cP++;
+    ll n;
+    cin>>n;
+    vector<ll>v(n);
+    for(ll i=0;i<n;i++){
+        cin>>v[i];
     }
-    if(cS==0 || cP==0)
+    if(v[n-1]==1)
     {
-        cout << "YES\n";
-        return ;
+        cout("NO");
+        return; 
     }
-    if(cS==1 && s[0]=='s')
+    cout("YES");
+    deque<ll>dq;
+    for(ll i=1;i<n;i++)
     {
-        cout<<"YES\n";
+        if(v[i]!=v[i-1]){
+            dq.pb(i);
+        }
     }
-    else if(cP==1 && s[n-1]=='p')
+    ll ln = sz(dq) ; 
+    for(ll i=0;i<n-ln;i++)
     {
-        cout<<"YES\n";
+        dq.pf(0);
     }
-    else cout << "NO\n";
+    for(auto i: dq)cout<<i<<' ';
+    cout<<"\n";
 }
 
 int main()

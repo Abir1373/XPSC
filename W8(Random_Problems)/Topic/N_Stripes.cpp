@@ -36,28 +36,44 @@ using namespace std ;
 
 void solve()
 {
-    ll n ; cin >> n ; 
-    string s ; cin >> s ; 
-    ll cS = 0 , cP=0 ; 
+    ll n = 8 ; char grid[n][n] ; 
     for(ll i=0;i<n;i++)
     {
-        if(s[i]=='s')cS++;
-        if(s[i]=='p')cP++;
+        for(ll j=0;j<n;j++)
+        {
+            cin >> grid[i][j] ; 
+        }
     }
-    if(cS==0 || cP==0)
+    for(ll i=0;i<n;i++)
     {
-        cout << "YES\n";
-        return ;
+        for(ll j=0;j<n;j++)
+        {
+            ll b = 0 , r = 0 ; 
+            if(grid[i][j]=='B')
+            {
+                for(ll k=0;k<n;k++)
+                {
+                    b+=(grid[i][k]=='B');
+                }
+                if(b==8)
+                {
+                    cout<<"B\n";
+                    return ;
+                }
+                b = 0 ; 
+                for(ll k=0;k<n;k++)
+                {
+                    b+=(grid[k][j]=='B') ;
+                }
+                if(b==8)
+                {
+                    cout<<"B\n";
+                    return ;
+                }
+            }
+        }
     }
-    if(cS==1 && s[0]=='s')
-    {
-        cout<<"YES\n";
-    }
-    else if(cP==1 && s[n-1]=='p')
-    {
-        cout<<"YES\n";
-    }
-    else cout << "NO\n";
+    cout << "R\n";
 }
 
 int main()
