@@ -36,28 +36,48 @@ using namespace std ;
 
 void solve()
 {
-    ll n = 8 ; char grid[n][n] ; 
-    for(ll i=0;i<n;i++)
+    ll n , m , k ; cin >> n >> m >> k ; 
+    vll v(m) , q(k) ; 
+    set<ll>st ; 
+    for(ll i=0;i<m;i++)
     {
-        for(ll j=0;j<n;j++)
-        {
-            cin >> grid[i][j] ; 
-        }
+        cin >> v[i] ;
     }
-    for(ll i=0;i<n;i++)
+    for(ll i=0;i<k;i++)
     {
-        ll b = 0 ; 
-        for(ll j=0;j<n;j++)
-        {
-            b+=(grid[j][i]=='B') ; 
-        }
-        if(b==8)
-        {
-            cout<<"B\n";
-            return ; 
-        }
+        cin >> q[i] ; 
+        st.insert(q[i]) ; 
     }
-    cout << "R\n";
+    ll dif = n-k ; 
+    if(dif<=0)
+    {
+        for(ll i=0;i<m;i++)
+        {
+            cout << "1" ;
+        }
+        cout << '\n' ; 
+        return ;
+    }
+    if(dif>1)
+    {
+        for(ll i=0;i<m;i++)
+        {
+            cout << "0";
+        }
+        cout << '\n' ; 
+        return ;
+    }
+
+    for(ll i=0;i<m;i++)
+    {
+        ll ans = st.size() - st.count(v[i]) ; 
+        if(ans==k)
+        {
+            cout<<"1";
+        }
+        else cout<<"0";
+    }
+    cout<<"\n";
 }
 
 int main()

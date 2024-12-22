@@ -36,28 +36,27 @@ using namespace std ;
 
 void solve()
 {
-    ll n = 8 ; char grid[n][n] ; 
-    for(ll i=0;i<n;i++)
+    ll n ;
+    cin>>n;
+    map<ll,ll>mp;
+    ll p=0;
+    for(ll i=1;i<=n;i++)
     {
-        for(ll j=0;j<n;j++)
+        ll a; 
+        cin>>a;
+        mp[i]=a;
+    }
+    for(auto it: mp)
+    {
+        ll val = it.f ;
+        ll val2 = it.s ;
+        if(mp[val2]==val)
         {
-            cin >> grid[i][j] ; 
+            p++;
+            break;
         }
     }
-    for(ll i=0;i<n;i++)
-    {
-        ll b = 0 ; 
-        for(ll j=0;j<n;j++)
-        {
-            b+=(grid[j][i]=='B') ; 
-        }
-        if(b==8)
-        {
-            cout<<"B\n";
-            return ; 
-        }
-    }
-    cout << "R\n";
+    cout << (p?2:3) << '\n';
 }
 
 int main()
