@@ -33,48 +33,29 @@ using namespace std ;
 #define clr(x,y) memset(x,y,sizeof x)
 #define pii pair<ll,ll>
 #define vll vector<ll>
-
+const ll mod = 1e9 + 7 ; 
 void solve()
 {
-    ll n ; cin >> n ; 
-    bool isPrime = true ; 
-    for(ll i=2;i*i<=n;i++)
-    {
-        if(n%i==0)
-        {
-            isPrime = false ; 
+    ll a, b;
+    cin >> a >> b;
+
+    ll ans = 1;
+    a %= mod; // Ensure `a` is within mod before starting.
+
+    while (b) {
+        if (b & 1) {
+            ans = (ans * a) % mod;
         }
-    } 
-    if(isPrime)
-    {
-        cout << 1 ; return ; 
+        a = (a * a) % mod;
+        b >>= 1; // Right shift b by 1 (divide by 2).
     }
-    if(n%2==0)
-    {
-        cout << 2 ; return ; 
-    }
-    else 
-    {
-        ll num = n - 2 ; 
-        isPrime = true ; 
-        for(ll i=2;i*i<=num;i++)
-        {
-            if(num%i==0)
-            {
-                isPrime = false ; 
-            }
-        }
-        if(isPrime)
-        {
-            cout << 2 ; return ; 
-        }
-        cout << 3 ;
-    }
+
+    cout << ans << '\n';
 }
 
 signed main()
 {
    FastRead;
-//    tc()
+   tc()
     solve();
 }
