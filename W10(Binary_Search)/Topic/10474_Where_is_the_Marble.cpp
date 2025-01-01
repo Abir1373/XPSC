@@ -36,37 +36,47 @@ using namespace std ;
 
 void solve()
 {
-    ll n , k ; cin >> n >> k ; 
-    vll v(n) , q(k) ; 
-    for(ll i=0;i<n;i++)
+    ll n , q ; 
+    ll test_case = 1 ; 
+    while(1)
     {
-        cin>>v[i] ; 
-    }
-    for(ll i=0;i<k;i++)
-    {
-        cin>>q[i] ;
-    }
-    for(ll i=0;i<k;i++)
-    {
-        ll l = 0 , r = n-1 , have = 0 ; 
-        while(l<=r)
+        cin >> n >> q ; 
+        if(n==0 && q==0)
         {
-            ll m = (l+r)>>1 ;
-            if(v[m]==q[i])
-            { 
-                have = 1 ; 
-                break ; 
-            } 
-            if(v[m]<q[i])
+            break ; 
+        }
+        vll v(n) ; 
+        for(ll i=0;i<n;i++)
+        {
+            cin >> v[i] ; 
+        } 
+        all(v) ; 
+        cout << "CASE# " << test_case++<<":\n";
+        while(q--)
+        {
+            ll num ; cin >> num ; 
+            ll lo = 0 , hi = n - 1 ; 
+            while(lo<=hi)
             {
-                l = m+1; 
+                ll m = (lo + hi) >> 1 ; 
+                if (v[m] >= num)
+                {   
+                    hi = m - 1 ; 
+                }   
+                else 
+                {
+                    lo = m + 1 ; 
+                }
             }
-            else if(v[m]>q[i])
+            if(v[lo]==num)
             {
-                r = m-1; 
+                cout << num << " found at " << lo+1 << '\n' ; 
+            }
+            else 
+            {
+                cout << num << " not found\n" ; 
             }
         }
-        cout << (have ? "YES\n" : "NO\n") ; 
     }
 }
 

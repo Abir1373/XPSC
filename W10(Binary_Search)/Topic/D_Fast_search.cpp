@@ -36,38 +36,55 @@ using namespace std ;
 
 void solve()
 {
-    ll n , k ; cin >> n >> k ; 
-    vll v(n) , q(k) ; 
+    ll n ; cin >> n ; 
+    vll v(n) ; 
     for(ll i=0;i<n;i++)
     {
         cin>>v[i] ; 
     }
-    for(ll i=0;i<k;i++)
+    all(v) ; 
+    ll q ; cin >> q ; 
+    while(q--)
     {
-        cin>>q[i] ;
-    }
-    for(ll i=0;i<k;i++)
-    {
-        ll l = 0 , r = n-1 , have = 0 ; 
+        ll lo , hi ; cin >> lo >> hi ; 
+        ll l  = 0 , r = n-1 , ansL , ansR ; 
         while(l<=r)
         {
-            ll m = (l+r)>>1 ;
-            if(v[m]==q[i])
-            { 
-                have = 1 ; 
-                break ; 
-            } 
-            if(v[m]<q[i])
+            ll m = (l+r)>>1 ; 
+            if(v[m]<lo)
             {
-                l = m+1; 
+                l = m+1 ; 
             }
-            else if(v[m]>q[i])
+            else 
             {
-                r = m-1; 
+                r = m-1 ; 
             }
         }
-        cout << (have ? "YES\n" : "NO\n") ; 
+        ansL = l ; 
+        l = 0 , r = n - 1 ; 
+        while(l<=r)
+        {
+            ll m = (l+r)>>1 ; 
+            if(v[m]<=hi)
+            {
+                l = m+1 ; 
+            }
+            else 
+            {
+                r = m-1 ; 
+            }
+        }  
+        ansR = r ; 
+        if(ansL>ansR)
+        {
+            cout << 0 << ' ' ; 
+        }
+        else 
+        {
+            cout << ansR - ansL + 1 << ' ' ;
+        }
     }
+
 }
 
 signed main()

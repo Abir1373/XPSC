@@ -36,7 +36,7 @@ using namespace std ;
 
 void solve()
 {
-    ll n , k ; cin >> n >> k ; 
+    ll n , k ; cin>>n>>k ; 
     vll v(n) , q(k) ; 
     for(ll i=0;i<n;i++)
     {
@@ -44,29 +44,34 @@ void solve()
     }
     for(ll i=0;i<k;i++)
     {
-        cin>>q[i] ;
+        cin>>q[i] ; 
     }
     for(ll i=0;i<k;i++)
     {
-        ll l = 0 , r = n-1 , have = 0 ; 
+        if(q[i]<v[0])
+        {
+            cout<<"0\n";
+            continue ;
+        }
+        if(q[i]>=v[n-1])
+        {
+            cout<<n<<'\n';
+            continue ;
+        }
+        ll l = 0 , r = n - 1 ;
         while(l<=r)
         {
             ll m = (l+r)>>1 ;
-            if(v[m]==q[i])
-            { 
-                have = 1 ; 
-                break ; 
-            } 
-            if(v[m]<q[i])
+            if(v[m]<=q[i])
             {
-                l = m+1; 
+                l = m+1 ; 
             }
-            else if(v[m]>q[i])
+            else 
             {
-                r = m-1; 
+                r = m-1 ; 
             }
         }
-        cout << (have ? "YES\n" : "NO\n") ; 
+        cout << r+1 << '\n' ;
     }
 }
 

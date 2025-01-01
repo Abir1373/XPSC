@@ -37,42 +37,28 @@ using namespace std ;
 void solve()
 {
     ll n , k ; cin >> n >> k ; 
-    vll v(n) , q(k) ; 
-    for(ll i=0;i<n;i++)
+    vll v(n+1) , q(k+1) , start(n+1,0) , end(n+1,0) ; 
+    for(ll i=1;i<=n;i++)
     {
-        cin>>v[i] ; 
+        cin >> v[i] ; 
     }
-    for(ll i=0;i<k;i++)
+    for(ll i=1;i<=k;i++)
     {
-        cin>>q[i] ;
+        cin >> q[i] ; 
     }
-    for(ll i=0;i<k;i++)
+    for(ll i=1;i<=n;i++)
     {
-        ll l = 0 , r = n-1 , have = 0 ; 
-        while(l<=r)
-        {
-            ll m = (l+r)>>1 ;
-            if(v[m]==q[i])
-            { 
-                have = 1 ; 
-                break ; 
-            } 
-            if(v[m]<q[i])
-            {
-                l = m+1; 
-            }
-            else if(v[m]>q[i])
-            {
-                r = m-1; 
-            }
-        }
-        cout << (have ? "YES\n" : "NO\n") ; 
+        start[i] = start[i-1] + v[i] ; 
+    }
+    for(ll i=1;i<=n;i++)
+    {
+        cout << start[i] << " " ; 
     }
 }
 
 signed main()
 {
    FastRead;
-//    tc()
+   tc()
     solve();
 }

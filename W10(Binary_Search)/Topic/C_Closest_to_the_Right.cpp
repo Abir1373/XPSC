@@ -44,29 +44,34 @@ void solve()
     }
     for(ll i=0;i<k;i++)
     {
-        cin>>q[i] ;
+        cin>>q[i] ; 
     }
     for(ll i=0;i<k;i++)
     {
-        ll l = 0 , r = n-1 , have = 0 ; 
+        if(v[0]>q[i])
+        {
+            cout << "1\n";
+            continue ;
+        }
+        if(v[n-1]<q[i])
+        {
+            cout << n+1 << '\n' ;
+            continue ; 
+        }
+        ll l = 0 , r = n-1 ; 
         while(l<=r)
         {
-            ll m = (l+r)>>1 ;
-            if(v[m]==q[i])
-            { 
-                have = 1 ; 
-                break ; 
-            } 
+            ll m = (l+r)>>1 ; 
             if(v[m]<q[i])
             {
-                l = m+1; 
+                l = m+1 ; 
             }
-            else if(v[m]>q[i])
+            else if(v[m]>=q[i]) 
             {
-                r = m-1; 
+                r = m-1 ; 
             }
         }
-        cout << (have ? "YES\n" : "NO\n") ; 
+        cout << l+1 << '\n' ;
     }
 }
 
