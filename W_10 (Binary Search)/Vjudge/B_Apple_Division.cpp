@@ -34,35 +34,40 @@ using namespace std ;
 #define pii pair<ll,ll>
 #define vll vector<ll>
 
+
+
 void solve()
 {
-    ll n , m ; cin >> n >> m ;
-    vll v(n+1) , q(m+1) , pre(n+1,0) ;
-    
-    for(ll i=1;i<=n;i++)
+    ll n ; cin >> n ; 
+    vll v(n) ; 
+    for(ll i=0;i<n;i++)
     {
-        cin >> v[i] ; 
-        pre[i] = pre[i-1] + v[i] ; 
+        cin>>v[i] ; 
     }
-    for(ll i=1;i<=m;i++)
+    ll ans = LLONG_MAX ; 
+    for(ll i=0;i<(1<<n);i++)
     {
-        cin >> q[i] ; 
+        ll one = 0 , two = 0 ; 
+        for(ll j=n-1;j>=0;j--)
+        {
+            if((i>>j)&1)
+            {
+                one+=v[j] ; 
+            }
+            else 
+            {
+                two+=v[j] ; 
+            }
+        }
+        ll d = abs(two-one) ; 
+        ans = min(ans,d) ; 
     }
-    for(ll i=1;i<=n;i++)
-    {
-        v[i] = max(v[i],v[i-1]) ; 
-    }
-    for(ll i=1;i<=m;i++)
-    {
-        ll x = upper_bound(v.begin(),v.end(),q[i]) - v.begin() ; 
-        cout << pre[x-1] << " \n"[i==m] ;
-    }
-    
+    cout << ans << '\n' ;
 }
 
 signed main()
 {
    FastRead;
-   tc()
+//    tc()
     solve();
 }

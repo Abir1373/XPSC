@@ -36,28 +36,21 @@ using namespace std ;
 
 void solve()
 {
-    ll n , m ; cin >> n >> m ;
-    vll v(n+1) , q(m+1) , pre(n+1,0) ;
-    
-    for(ll i=1;i<=n;i++)
+    ll n , l , r ; cin >> n >> l >> r ; 
+    vll v(n) ; 
+    for(ll i=0;i<n;i++)
     {
         cin >> v[i] ; 
-        pre[i] = pre[i-1] + v[i] ; 
     }
-    for(ll i=1;i<=m;i++)
+    all(v) ;
+    ll ans = 0 ;  
+    for(ll i=0;i<n;i++)
     {
-        cin >> q[i] ; 
+        ll id_one = lower_bound(v.begin()+i+1,v.end(),l-v[i]) - v.begin() ; 
+        ll id_two = upper_bound(v.begin()+i+1,v.end(),r-v[i]) - v.begin() ; 
+        ans+=(id_two-id_one) ; 
     }
-    for(ll i=1;i<=n;i++)
-    {
-        v[i] = max(v[i],v[i-1]) ; 
-    }
-    for(ll i=1;i<=m;i++)
-    {
-        ll x = upper_bound(v.begin(),v.end(),q[i]) - v.begin() ; 
-        cout << pre[x-1] << " \n"[i==m] ;
-    }
-    
+    cout << ans << '\n' ;
 }
 
 signed main()

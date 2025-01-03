@@ -36,33 +36,37 @@ using namespace std ;
 
 void solve()
 {
-    ll n , m ; cin >> n >> m ;
-    vll v(n+1) , q(m+1) , pre(n+1,0) ;
-    
+    ll n , m ; cin >> n >> m ; 
+    vll v(n+1) , pre(n+1,0) ;
     for(ll i=1;i<=n;i++)
     {
-        cin >> v[i] ; 
+        cin >> v[i] ;
         pre[i] = pre[i-1] + v[i] ; 
     }
-    for(ll i=1;i<=m;i++)
+    ll cur = 0 , next = 1 , ans = 0 ; 
+    while(next<=n)
     {
-        cin >> q[i] ; 
+        ll sum = pre[next] - pre[cur] ;
+        if(sum==m)
+        {
+            ans += 1 ;
+            next++ ;  
+        }
+        else if(sum<m)
+        {
+            next++ ; 
+        }
+        else 
+        {
+            cur++ ; 
+        }
     }
-    for(ll i=1;i<=n;i++)
-    {
-        v[i] = max(v[i],v[i-1]) ; 
-    }
-    for(ll i=1;i<=m;i++)
-    {
-        ll x = upper_bound(v.begin(),v.end(),q[i]) - v.begin() ; 
-        cout << pre[x-1] << " \n"[i==m] ;
-    }
-    
+    cout << ans << '\n' ; 
 }
 
 signed main()
 {
    FastRead;
-   tc()
+//    tc()
     solve();
 }
