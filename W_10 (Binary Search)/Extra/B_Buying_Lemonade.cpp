@@ -36,38 +36,37 @@ using namespace std ;
 
 void solve()
 {
-    ll m , n ; cin >> m >> n ; 
+    ll n , m ; cin >> n >> m ; 
     vll v(n) ; 
     for(ll i=0;i<n;i++)
     {
         cin >> v[i] ; 
     }
-    set<ll>st = {0,m} ;
-    map<ll,ll>have ; 
-    have[m]++ ;  
+    all(v) ;
+    ll ans = 0 , r = n - 1 , l = 0 , sub = 0 ; 
     for(ll i=0;i<n;i++)
     {
-        auto it = st.upper_bound(v[i]); 
-        ll next_value = *it ; 
-        ll prev_value = *prev(it) ; 
-        ll d = next_value - prev_value ; 
-        have[d]-- ; 
-        if(have[d]==0)
+        v[l]-=sub ; 
+        ll tot = (r - l + 1) * v[l] ; 
+        if(tot>=m)
         {
-            have.erase(d) ; 
+            ans+=m ; 
+            cout << ans << '\n' ; 
+            return ; 
         }
-        ll lf = v[i] - prev_value ; 
-        ll rg = next_value - v[i] ; 
-        have[lf]++ ;
-        have[rg]++ ; 
-        st.insert(v[i]) ; 
-        cout << have.rbegin()->first << ' ';
-    } 
+        else 
+        {
+            m -= tot ; 
+            ans+=(tot+1);
+            sub+=max(v[l],0ll) ; 
+            l++ ; 
+        }
+    }
 }
 
 signed main()
 {
    FastRead;
-//    tc()
+   tc()
     solve();
 }
